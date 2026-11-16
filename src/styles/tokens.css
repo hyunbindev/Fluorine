@@ -1,0 +1,21 @@
+@theme {
+  --color-chrome: rgb(12 12 15 / 50%);
+  --color-shell-foreground: #e4e4e7;
+  --color-shell-focus: #e68a80;
+  --color-title-foreground: #cacace;
+  --color-control-foreground: #8e8e97;
+  --color-control-hover: #eeeeee;
+  --color-control-close: #c74242;
+  --color-menu-foreground: #72727d;
+  --color-menu-hover: #c8c8d0;
+  --color-menu-accent: #ec6f66;
+  --color-menu-active: #ee8c81;
+  --color-menu-indicator: #e98277;
+  --color-emblem-from: #38383e;
+  --color-emblem-to: #242428;
+  --color-emblem-foreground: #d4d4da;
+  --color-avatar-surface: #303036;
+  --color-avatar-foreground: #a4a4ad;
+  --shadow-menu-active: inset 0 1px 0 rgb(255 255 255 / 3%);
+  --shadow-emblem: 0 3px 8px rgb(0 0 0 / 15%), inset 0 1px 0 rgb(255 255 255 / 5%);
+}
