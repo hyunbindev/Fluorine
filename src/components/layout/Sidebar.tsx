@@ -8,8 +8,8 @@ const activeMenuClass = 'border-menu-accent/12 bg-menu-accent/11 text-menu-activ
 const menus = [
   { icon: LayoutGrid, label: '홈', to: '/' },
   { icon: Command, label: '명령', to: '/commands' },
-  { icon: StickyNote, label: '메모', to: '/notes' },
-  { icon: ClipboardList, label: '클립보드', to: '/clipboard' },
+  { icon: StickyNote, label: '노트', to: '/notes' },
+  { icon: ClipboardList, label: '메모', to: '/memo' },
   { icon: Boxes, label: '도구', to: '/tools' },
 ]
 
