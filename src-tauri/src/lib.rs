@@ -6,6 +6,7 @@ mod window_style;
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_clipboard_manager::init())
         .setup(|app| {
             #[cfg(target_os = "windows")]
             window_style::apply(app)?;
@@ -17,6 +18,11 @@ pub fn run() {
                     version: 1,
                     description: "create_notes",
                     sql: "CREATE TABLE IF NOT EXISTS notes (id INTEGER PRIMARY KEY, content TEXT NOT NULL, updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);",
+                    kind: MigrationKind::Up,
+                }, Migration {
+                    version: 2,
+                    description: "create_memos",
+                    sql: include_str!("../migrations/002_create_memos.sql"),
                     kind: MigrationKind::Up,
                 }])
                 .build(),

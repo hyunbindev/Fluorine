@@ -1,5 +1,6 @@
 @theme {
-  --color-chrome: rgb(12 12 15 / 50%);
+  --color-chrome: rgb(12 12 15 / 0%);
+  --color-frame-surface: rgb(12 12 15 / 60%);
   --color-chrome-solid: #0c0c0f;
   --color-composer-surface: rgb(18 18 22 / 78%);
   --shadow-composer: 0 8px 30px rgb(0 0 0 / 12%), inset 0 1px 0 rgb(255 255 255 / 3%);

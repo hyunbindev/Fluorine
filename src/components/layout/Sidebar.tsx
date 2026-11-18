@@ -15,7 +15,7 @@ const menus = [
 
 export default function Sidebar() {
   return (
-    <aside className="flex w-16.25 shrink-0 flex-col items-center border-r border-white/6 bg-chrome pt-4.5 pb-3.5" aria-label="메인 메뉴">
+    <aside className="flex w-16.25 shrink-0 flex-col items-center border-r border-white/6 bg-frame-surface pt-4.5 pb-3.5" aria-label="메인 메뉴">
       <nav className="flex flex-col gap-2.25">
         {menus.map(({ icon: Icon, label, to }) => (
           <NavLink key={label}
