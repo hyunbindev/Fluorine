@@ -12,15 +12,38 @@ function getDatabase() {
   return connection
 }
 
-export async function loadNote(): Promise<string | null> {
+type NoteRow = { id: number; content: string; updated_at: string }
+
+export async function loadNotes() {
   const db = await getDatabase()
-  const rows = await db.select<{ content: string }[]>('SELECT content FROM notes WHERE id = 1')
-  return rows[0]?.content ?? null
+  return db.select<NoteRow[]>('SELECT id, content, updated_at FROM notes ORDER BY updated_at DESC, id DESC')
 }
 
-export async function saveNote(content: string) {
+export async function loadNote(id: number) {
   const db = await getDatabase()
-  await db.execute('INSERT INTO notes (id, content) VALUES (1, $1) ON CONFLICT(id) DO UPDATE SET content = excluded.content, updated_at = CURRENT_TIMESTAMP', [content])
+  const rows = await db.select<NoteRow[]>('SELECT id, content, updated_at FROM notes WHERE id = $1', [id])
+  return rows[0] ?? null
+}
+
+export async function saveNote(content: string, id?: number) {
+  const db = await getDatabase()
+  if (id === undefined) {
+    const { lastInsertId } = await db.execute('INSERT INTO notes (content) VALUES ($1)', [content])
+    if (typeof lastInsertId !== 'number') throw new Error('저장된 노트의 ID를 읽을 수 없습니다.')
+    return lastInsertId
+  }
+
+  const result = await db.execute(
+    'UPDATE notes SET content = $1, updated_at = CURRENT_TIMESTAMP WHERE id = $2',
+    [content, id],
+  )
+  if (result.rowsAffected === 0) throw new Error('수정할 노트를 찾을 수 없습니다.')
+  return id
+}
+
+export async function deleteNote(id: number) {
+  const db = await getDatabase()
+  await db.execute('DELETE FROM notes WHERE id = $1', [id])
 }
 
 type MemoRow = { id: string; text: string; created_at: string }
