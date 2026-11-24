@@ -94,7 +94,7 @@ function NoteEditor({ body, id }: { body: string; id?: number }) {
             </button>
           ))}
         </div>
-        <div className="min-h-0 flex-1 overflow-auto">
+        <div className="min-h-0 flex-1 overflow-auto [&::-webkit-scrollbar]:size-2.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-2 [&::-webkit-scrollbar-thumb]:border-transparent [&::-webkit-scrollbar-thumb]:bg-control-foreground/45 [&::-webkit-scrollbar-thumb]:bg-clip-padding [&::-webkit-scrollbar-thumb:hover]:bg-control-hover/65 [&::-webkit-scrollbar-track]:bg-transparent">
           <div className="mx-auto px-10 py-8">
             <EditorContent editor={editor} />
           </div>

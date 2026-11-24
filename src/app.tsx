@@ -1,8 +1,11 @@
 import TitleBar from '@/components/layout/TitleBar'
 import Sidebar from '@/components/layout/Sidebar'
 import RouteTransition from '@/components/layout/RouteTransition'
+import { useTrayLifecycle } from '@/lib/trayLifecycle'
 
 export default function App() {
+  useTrayLifecycle()
+
   return (
     <div className="flex h-dvh flex-col overflow-hidden bg-transparent select-none">
       <TitleBar />

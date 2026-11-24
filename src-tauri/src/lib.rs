@@ -1,3 +1,6 @@
+mod database;
+mod tray;
+
 use tauri_plugin_sql::{Migration, MigrationKind};
 
 #[cfg(target_os = "windows")]
@@ -6,12 +9,10 @@ mod window_style;
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .invoke_handler(tauri::generate_handler![tray::finish_quit])
         .plugin(tauri_plugin_clipboard_manager::init())
-        .setup(|app| {
-            #[cfg(target_os = "windows")]
-            window_style::apply(app)?;
-            Ok(())
-        })
+        .setup(tray::setup)
+        .plugin(database::migration_compatibility())
         .plugin(
             tauri_plugin_sql::Builder::default()
                 .add_migrations("sqlite:utility.db", vec![Migration {

@@ -1,8 +1,7 @@
-import { isTauri } from '@tauri-apps/api/core'
-import { getCurrentWindow } from '@tauri-apps/api/window'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useBeforeUnload, useBlocker } from 'react-router'
 import { deleteNote, saveNote } from '@/lib/database'
+import { registerTrayNoteSave } from '@/lib/trayLifecycle'
 
 type SaveStatus = 'idle' | 'pending' | 'saving' | 'saved' | 'failed'
 
@@ -107,18 +106,7 @@ export function useNoteAutosave(id?: number) {
     if (hasPending()) event.preventDefault()
   }, [hasPending]))
 
-  useEffect(() => {
-    if (!isTauri()) return
-    let active = true
-    const subscription = getCurrentWindow().onCloseRequested(async (event) => {
-      if (!active || !(await flush())) event.preventDefault()
-    })
-    void subscription.catch(console.error)
-    return () => {
-      active = false
-      void subscription.then((unlisten) => unlisten(), () => {})
-    }
-  }, [flush])
+  useEffect(() => registerTrayNoteSave(flush), [flush])
 
   useEffect(() => () => window.clearTimeout(timer.current), [])
 

@@ -57,7 +57,7 @@ export default function TitleBar() {
           </button>
           <button className={`${controlClass} hover:bg-white/7 hover:text-control-hover`} aria-label="최소화" onClick={() => windowAction('minimize')}><Minus size={14} /></button>
           <button className={`${controlClass} hover:bg-white/7 hover:text-control-hover`} aria-label="최대화 또는 복원" onClick={() => windowAction('toggleMaximize')}><Square size={11} /></button>
-          <button className={`${controlClass} hover:bg-control-close hover:text-white`} aria-label="닫기" onClick={() => windowAction('close')}><X size={15} /></button>
+          <button className={`${controlClass} hover:bg-control-close hover:text-white`} aria-label="트레이로 숨기기" title="트레이로 숨기기" onClick={() => windowAction('close')}><X size={15} /></button>
         </div>
         <span className="sr-only" role="status">{pinError}</span>
       </header>
